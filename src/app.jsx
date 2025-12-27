@@ -13,20 +13,17 @@ export const App = () => {
           <button
             onClick={() =>
               refetch({
-                params: {
-                  _limit: 3,
-                },
+                params: { _limit: 3 },
               })
             }
+            disabled={isLoading}
           >
-            Перезапросить
+            {isLoading ? 'Загрузка...' : 'Перезапросить'}
           </button>
         </div>
-        {isLoading && 'Загрузка...'}
+        {isLoading && !data && 'Загрузка...'}
         {error && 'Произошла ошибка'}
-        {data &&
-          !isLoading &&
-          data.map((item) => <div key={item.id}>{item.title}</div>)}
+        {data && data.map((item) => <div key={item.id}>{item.title}</div>)}
       </div>
     </>
   );

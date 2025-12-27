@@ -23,9 +23,13 @@ export const useFetch = (initialUrl) => {
       let finalUrl = url;
       if (params && Object.keys(params).length > 0) {
         const urlObj = new URL(url);
+        const searchParams = new URLSearchParams();
+
         Object.entries(params).forEach(([key, value]) => {
-          urlObj.searchParams.append(key, String(value));
+          searchParams.append(key, String(value));
         });
+
+        urlObj.search = searchParams.toString();
         finalUrl = urlObj.toString();
       }
 
